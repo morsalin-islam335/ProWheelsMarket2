@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div class = 'd-flex row align-items-center bg-black' style = 'padding-top:100px'>
+        <div class = 'col-5 bg-success'>
+            <h1 class = 'text-center text-dark'>Welcome to ProWheelsMarket</h1>
+            <h3 class = 'text-alert  text-center'>ProWhellsMarket is one of the best online market.</h3>
+            <h4 class = 'text-white text-center'>Buy and sell Quality Cars</h4>
+            <h6 class = 'text-light text-center'>Our mission is to help you buy and sell luxury and quality cars.</h6>
+        </div>
+        <div class = 'col-7'>
+            {% load static %}
+            <img class = 'w-100' src="{% static 'WebProfile.jpeg' %}" alt="">
+        </div>
+    </div>
+
+    {% if isFiltered %}
+        <h4 class = 'mt-3 px-5'>Total Car Found: <b class='text-success'>{{cars | length}}</b></h4>
+    {% endif %}
+    <h3 class= 'text-success text-center mt-5'>Search By Brand</h3>
+    <div class = 'd-flex justify-content-center'>
+        <div>
+            {% for car in categories %}
+            <a href = "{% url 'searchByCategory' car.slug %}" class = 'btn btn-success text-white m-2'>{{car.brand}}</a>
+
+            {% endfor %}
+            
+        </div>
+    </div>
+
+    <div class = 'mt-5 d-flex flex-wrap justify-content-center' style = 'gap:30px;'>
+     
+        {% for car in cars %}
+        <div class="card text-center" style="width: 30rem;">
+            <img src="{{car.image.url}}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Model Name: <i class  = 'text-success'>{{car.name}}</i></h5>
+              <h3 class="card-title">Brand: <b class = 'text-primary'>{{car.brand.brand}}</b></h3>
+              <p class="card-text">{{car.description|truncatewords:60}}</p>
+              <a href="{% url 'viewDetails' car.id %}" class="btn btn-primary">View Details</a>
+            </div>
+          </div>
+        {% endfor %}
+    </div>
+
+  
+{% endblock content %}
+
+{% block menubar %}
+
+    {% if user.applicationUser.isOwner %} {% comment "" %}Shudhu matro owner ei brand add korta parba and product add korta parba{% endcomment %}
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'addBrand'%}">Add Brand</a> {% comment "" %} {% url 'updateProfile'%} {% endcomment %}
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'addProduct'%}">Add Product</a> {% comment "" %}{% url 'changePass1'%}{% endcomment %}
+        </li>
+    {% endif %}
+{% endblock menubar %}

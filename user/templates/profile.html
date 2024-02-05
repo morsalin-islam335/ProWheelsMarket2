@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1 class = 'bg-success text-info text-center'>Welcome to your profile {{user.first_name}} {{user.last_name}}</h1>
+               {% if user.applicationUser %}
+                    {% comment %} owner er joto gulo product aca ta tar profile a show korba {% endcomment %}
+                    {% if haveProducts %}
+                        <h3 class = ' text-warning mt-3 text-center px-5 mx-5'> All Prducts in Market Place</h3>
+
+                              {% comment %} eikhan theka sob product er item show korba  {% endcomment %}
+                              
+                              <div class = 'mt-5 d-flex flex-wrap justify-content-center bg-info p-3' style = 'gap:30px;'>
+                         
+                                  {% for car in haveProducts %}
+                                        <div class="card text-center" style="width: 30rem;">
+                                             <img src="{{car.image.url}}" class="card-img-top" alt="...">
+                                             <div class="card-body">
+                                                  <h5 class="card-title">Model Name: <i class  = 'text-success'>{{car.name}}</i></h5>
+                                                  <h3 class="card-title">Brand: <b class = 'text-primary'>{{car.brand.brand}}</b></h3>
+                                                  <p class="card-text">{{car.description|truncatewords:60}}</p>
+                                                  <a href="{% url 'viewDetails' car.id %}" class="btn btn-primary">View Details</a>
+                                             </div>
+                                        </div>
+                                   {% endfor %} 
+
+     
+                              </div>
+                               {% comment "Eikhana porduct add kora sesh hoiba" %}{% endcomment %}
+
+                    {% else %}
+                         <h1 class = 'bg-info text-danger text-center'>You have not any product in Market Place</h1>
+                    {% endif %}
+
+                    {% if products %}
+                              {% comment %} ekjon owner chaila onno brand er product purchaces krota parba {% endcomment %}
+                              
+          
+                              <h3 class = 'text-light text-center ' style = 'margin-top:50px; background-color:black;'>Your purches products</h3>
+                              <div class = 'd-flex flex-wrap justify-content-center bg-dark p-3' style = 'gap:30px;'>
+                         
+                                   {% for car in products %}
+                                        <div class="card text-center" style="width: 30rem;">
+                                             <img src="{{car.image.url}}" class="card-img-top" alt="...">
+                                             <div class="card-body">
+                                                  <h5 class="card-title">Model Name: <i class  = 'text-success'>{{car.name}}</i></h5>
+                                                  <h3 class="card-title">Brand: <b class = 'text-primary'>{{car.brand.brand}}</b></h3>
+                                                  <p class="card-text">{{car.description|truncatewords:60}}</p>
+                                                  <a href="{% url 'viewDetails' car.id %}" class="btn btn-primary">View Details</a>
+                                             </div>
+                                        </div>
+                                   {% endfor %}
+                              </div>
+                         
+                    {% endif %}
+
+               {% else %}
+                    
+                    {% if products %}
+          
+                    <h3 class = 'text-light text-center ' style = 'margin-top:50px; background-color:black;'>Your purches products</h3>
+                    <div class = 'd-flex flex-wrap justify-content-center bg-dark p-3' style = 'gap:30px;'>
+               
+                         {% for car in products %}
+                              <div class="card text-center" style="width: 30rem;">
+                                   <img src="{{car.image.url}}" class="card-img-top" alt="...">
+                                   <div class="card-body">
+                                        <h5 class="card-title">Model Name: <i class  = 'text-success'>{{car.name}}</i></h5>
+                                        <h3 class="card-title">Brand: <b class = 'text-primary'>{{car.brand.brand}}</b></h3>
+                                        <p class="card-text">{{car.description|truncatewords:60}}</p>
+                                        <a href="{% url 'viewDetails' car.id %}" class="btn btn-primary">View Details</a>
+                                   </div>
+                              </div>
+                         {% endfor %}
+                    </div>
+                    
+                    {% else %}
+                              <h1 class = ' mt-5 text-danger text-center'>You have not any purces item yet.</h1>
+
+                    {% endif %}
+               {% endif %}
+      </div>
+  
+
+
+
+
+      {% comment %} {% else %}
+      <h5 class = 'text-center text-danger' style = 'margin-top:150px;'>You have not purchaces history yet.</h5>
+     {% endif %} {% endcomment %}
+{% endblock content %}
+
+
+{% block menubar %}
+
+
+
+  
+
+
+     <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'changePassword'%}">Change Password</a> {% comment "" %}{% url 'changePass1'%}{% endcomment %}
+     </li>
+  
+{% endblock menubar %}

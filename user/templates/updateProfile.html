@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h3 class = 'bg-info text-succes text-center'>Update Profile Form</h3>
+<form method = "POST" enctype = 'multipart/form-data' class = 'w-50 m-auto'>
+
+    {% load crispy_forms_tags %}
+
+    {% csrf_token %}
+    {{form1 | crispy}}
+    {{form2 | crispy}}
+
+    <button type="submit">submit</button>
+
+</form>
+
+{% endblock content %}

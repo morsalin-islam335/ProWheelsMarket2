@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h3 class = 'bg-info text-succes text-center'>Sign Up Form</h3>
+<form method = "POST" enctype = 'multipart/form-data' class = 'w-50 m-auto'>
+
+    {% if form1.non_field_error %}
+        {% for error in form1.non_field_error %}
+                <h3 class = 'text-danger bg-alert'>{{error}}</h3>
+        {% endfor %}
+    {% endif %}
+    {% load crispy_forms_tags %}
+
+    {% csrf_token %}
+    {{form1 | crispy}}
+    {{form2 | crispy}}
+
+    <button class= 'btn btn-success text-light' type="submit">Sign Up</button>
+
+</form>
+
+{% endblock content %}
