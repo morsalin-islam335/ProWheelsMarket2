@@ -31,6 +31,16 @@ def signUpAsOwner(request): # owner ekta company er multiple product add korta p
                 profilePic.save()
 
                 messages.success(request, 'Congratulations! Owner Account Create Successfully.')
+                
+                mailSubject = 'Sign Up Conformation mail'
+
+                message = render_to_string('sign_up_mail.html',{'first_name':informationForm.cleaned_data.get('first_name'),"last_name":informationForm.cleaned_data.get("last_name")}) # eta template ka string a convert korba
+                to_email = informationForm.cleaned_data.get("email")
+                # send_email = EmailMessage(mailSubject, message, to = [to_email]) # chaila multiple email a message send kora jaba
+                send_email = EmailMultiAlternatives(mailSubject, '', to = [to_email]) # chaila multiple email a message send kora jaba
+                send_email.attach_alternative(message, 'text/html') # mail a attach korbo and message ki typer hoba seta hoccha text/html
+                
+                send_email.send()
                 return redirect('login')
         else:
             form1 = OwnerForm1() 
