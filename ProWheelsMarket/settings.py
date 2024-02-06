@@ -17,7 +17,6 @@ ALLOWED_HOSTS = ['*']
 CSRF_TRUSTED_ORIGINS = ['https://prowheelsmarkets.onrender.com','https://*.127.0.0.1']
 
 
-# Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -33,6 +32,8 @@ INSTALLED_APPS = [
     'crispy_bootstrap5',
 
 ]
+CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5',
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
