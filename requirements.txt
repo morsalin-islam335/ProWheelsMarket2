@@ -1,4 +1,3 @@
---upgrade pip
 asgiref
 crispy-bootstrap5
 Django
