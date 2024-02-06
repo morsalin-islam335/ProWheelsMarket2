@@ -11,7 +11,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 CSRF_TRUSTED_ORIGINS = ['https://prowheelsmarkets.onrender.com','https://*.127.0.0.1']
@@ -113,6 +113,7 @@ USE_TZ = True
 
 
 STATIC_URL = 'static/'
+
 STATICFILES_DIRS = [
     BASE_DIR/'static'
 ]
@@ -138,3 +139,5 @@ EMAIL_HOST_USER  = env("Email") #sender's email-id
 EMAIL_HOST_PASSWORD = env("Email_Password") #password associated with above email-id
 
 SECRET_KEY = env("KEY")
+
+MEDIA_URL = '/media/'
